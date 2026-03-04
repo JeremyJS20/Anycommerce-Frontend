@@ -7,6 +7,8 @@ import { LanguageProvider } from '@Presentation/Context/LanguageContext'
 import { AuthProvider, useAuth } from '@Presentation/Context/AuthContext'
 import { Home } from '@Presentation/Pages/Home'
 import { SignIn } from '@Presentation/Pages/Auth/SignIn'
+import { Products } from '@Presentation/Pages/Products'
+import { ProductDetails } from '@Presentation/Pages/ProductDetails'
 import { motion } from 'framer-motion';
 import { Logo } from '@Presentation/Components/Common/Logo';
 
@@ -58,6 +60,8 @@ const AppContent = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/signin" element={<SignIn />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/product/:productId" element={<ProductDetails />} />
                 </Routes>
             </main>
 

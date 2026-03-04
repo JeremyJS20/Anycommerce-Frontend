@@ -60,6 +60,8 @@ export type productQueryParams = {
     subcategory: string | null;
     sort: string | null;
     index: number | null;
+    startDate: string | null;
+    endDate: string | null;
 };
 
 export type ProductAdditionalData = {

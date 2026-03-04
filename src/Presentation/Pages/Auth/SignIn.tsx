@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '@Presentation/Context/AuthContext';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Eye, EyeOff } from 'lucide-react';
 
 export const SignIn = () => {
     const { t } = useTranslation();
@@ -14,6 +15,9 @@ export const SignIn = () => {
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => setIsVisible(!isVisible);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -99,13 +103,22 @@ export const SignIn = () => {
                             <Input
                                 config={{
                                     name: "password",
-                                    type: "password",
+                                    type: isVisible ? "text" : "password",
                                     labelPlacement: "outside",
                                     placeholder: "••••••••",
                                     variant: "bordered",
                                     radius: "lg",
                                     size: "lg",
                                     isRequired: true,
+                                    endContent: (
+                                        <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
+                                            {isVisible ? (
+                                                <EyeOff className="text-2xl text-default-400 pointer-events-none" />
+                                            ) : (
+                                                <Eye className="text-2xl text-default-400 pointer-events-none" />
+                                            )}
+                                        </button>
+                                    ),
                                     classNames: {
                                         inputWrapper: "bg-pfm-bg border-pfm-border hover:border-pfm-primary focus-within:border-pfm-primary transition-all shadow-sm",
                                         input: "text-pfm-text placeholder:text-pfm-text-muted/60",
