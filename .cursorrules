@@ -1,0 +1,17 @@
+# AnyCommerce Frontend - System Instructions
+
+ALWAYS enforce the guidelines and rules defined in `project_context.md` for every request.
+
+Key Mandatory Points:
+- **Clean Architecture:** Respect the Domain, Data, Infrastructure, and Presentation boundaries.
+- **Tech Stack:** React 19 (Vite), TypeScript, HeroUI v3, Tailwind CSS v4.0, Stripe.
+- **Aesthetic:** Premium, Modern, Dynamic (Glassmorphism, Gradients).
+- **Design System:** Standardize on Premium Teal/Slate palette (`pfm-primary`, `pfm-bg`, `pfm-card`, `glass`). Use **Inter** typography.
+- **Micro-animations:** Prioritize smooth transitions and interactions using Framer Motion as defined in `project_context.md`.
+- **Consistency:** Follow component styles (Buttons, List items) and patterns (rounded corners, shadow depth, transition speeds) defined in `project_context.md`.
+- **Generic Components (MANDATORY):** All components (Buttons, Tables, Modals, etc.) MUST be built as generic, reusable, and customizable wrappers around HeroUI components, configured via a single JSON object.
+- **Internationalization:** Never hardcode strings; use `i18next`.
+- **Typing:** Strict TypeScript (no `any`). Update Domain entities if API responses change.
+- **API Calls:** Route all HTTP requests through the `Infrastructure/Services` layer.
+
+Before starting any task, verify your plan against the architecture map in `project_context.md`.

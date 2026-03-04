@@ -1,0 +1,98 @@
+import { Link } from 'react-router-dom';
+import { Button } from '@Presentation/Components/Common/Button';
+import { Input } from '@Presentation/Components/Common/Input';
+import { Logo } from '@Presentation/Components/Common/Logo';
+import { useTranslation } from 'react-i18next';
+
+export const SignIn = () => {
+    const { t } = useTranslation();
+
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-pfm-bg p-6 relative overflow-hidden">
+            {/* Background Decorative Blobs */}
+            <div className="absolute top-0 -left-4 w-72 h-72 bg-pfm-primary/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+            <div className="absolute bottom-0 -right-4 w-96 h-96 bg-pfm-secondary/10 rounded-full blur-3xl animate-pulse"></div>
+
+            {/* Left Side: Login Form */}
+            <div className="relative z-10 flex-1 flex flex-col justify-center px-8 py-12 lg:px-16 bg-pfm-card/50 glass w-full max-w-[500px] rounded-2xl">
+                <div className="sm:mx-auto sm:w-full">
+                    {/* Logo */}
+                    <Logo config={{ size: "lg", className: "mb-8 " }} />
+                    <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-pfm-text mb-2 tracking-tight">{t('auth.welcome_back')}</h1>
+                    <p className="text-base text-pfm-text-muted">
+                        {t('auth.enter_details')}
+                    </p>
+                </div>
+                <div className="mt-10 sm:mx-auto sm:w-full">
+                    <form action="#" className="space-y-6" method="POST">
+                        {/* Email Input */}
+                        <div>
+                            <Input
+                                config={{
+                                    type: "email",
+                                    label: t('auth.email_address'),
+                                    labelPlacement: "outside",
+                                    placeholder: t('auth.email_placeholder'),
+                                    variant: "bordered",
+                                    radius: "lg",
+                                    size: "lg",
+                                    classNames: {
+                                        inputWrapper: "bg-pfm-bg border-pfm-border hover:border-pfm-primary focus-within:border-pfm-primary transition-all shadow-sm",
+                                        input: "text-pfm-text placeholder:text-pfm-text-muted/60",
+                                        label: "text-pfm-text font-bold pb-2 text-sm"
+                                    }
+                                }}
+                            />
+                        </div>
+
+                        {/* Password Input */}
+                        <div className="relative">
+                            <div className="flex items-center justify-between mb-2">
+                                <label className="text-pfm-text font-bold text-sm">
+                                    {t('auth.password')}
+                                </label>
+                                <Link className="text-sm font-bold text-pfm-primary hover:text-pfm-primary-hover transition-colors" to="/forgot-password">
+                                    {t('auth.forgot_password')}
+                                </Link>
+                            </div>
+                            <Input
+                                config={{
+                                    type: "password",
+                                    labelPlacement: "outside",
+                                    placeholder: "••••••••",
+                                    variant: "bordered",
+                                    radius: "lg",
+                                    size: "lg",
+                                    classNames: {
+                                        inputWrapper: "bg-pfm-bg border-pfm-border hover:border-pfm-primary focus-within:border-pfm-primary transition-all shadow-sm",
+                                        input: "text-pfm-text placeholder:text-pfm-text-muted/60",
+                                    }
+                                }}
+                            />
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="mt-10">
+                            <Button
+                                config={{
+                                    type: "button",
+                                    variant: "solid",
+                                    className: "w-full bg-pfm-primary text-white font-bold rounded-xl px-6 h-12 shadow-lg shadow-pfm-primary/20 transition-all hover:bg-pfm-primary-hover hover:shadow-xl hover:-translate-y-1 active:scale-95 text-lg",
+                                    children: t('auth.sign_in')
+                                }}
+                            />
+                        </div>
+                    </form>
+                </div>
+
+                {/* Sign Up Link */}
+                <p className="mt-10 text-center text-sm text-pfm-text-muted">
+                    {t('auth.no_account')}{' '}
+                    <Link className="font-semibold leading-6 text-pfm-primary hover:text-pfm-primary-hover transition-colors" to="/register">
+                        {t('auth.sign_up')}
+                    </Link>
+                </p>
+            </div>
+        </div>
+    );
+};

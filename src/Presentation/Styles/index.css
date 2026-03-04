@@ -1,0 +1,102 @@
+@import "tailwindcss";
+@plugin "./hero";
+@source "../../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Map Tailwind's color utilities to our dynamic CSS variables */
+    --color-pfm-primary: var(--pfm-primary);
+    --color-pfm-primary-hover: var(--pfm-primary-hover);
+    --color-pfm-secondary: var(--pfm-secondary);
+    --color-pfm-bg: var(--pfm-bg);
+    --color-pfm-card: var(--pfm-card);
+    --color-pfm-text: var(--pfm-text);
+    --color-pfm-text-dark: var(--pfm-text-dark);
+    --color-pfm-text-light: var(--pfm-text-light);
+    --color-pfm-text-muted: var(--pfm-text-muted);
+    --color-pfm-border: var(--pfm-border);
+
+    /* Font */
+    --font-inter: "Inter", sans-serif;
+
+    /* Screen Definitions */
+    --breakpoint-mobile: 480px;
+    --breakpoint-tablet: 768px;
+    --breakpoint-laptop: 1024px;
+    --breakpoint-desktop: 1280px;
+}
+
+@layer base {
+    :root {
+        --pfm-primary: #0D9488;
+        --pfm-primary-hover: #0F766E;
+        --pfm-secondary: #10B981;
+        --pfm-bg: #F8FAFC;
+        --pfm-card: #FFFFFF;
+
+        --pfm-text: #0F172A;
+        --pfm-text-dark: #0F172A;
+        --pfm-text-light: #F8FAFC;
+        --pfm-text-muted: #64748B;
+        --pfm-border: rgba(226, 232, 240, 0.5);
+
+        /* HeroUI Overrides */
+        --heroui-primary: 172.5 66.1% 31.4%;
+        /* #0D9488 */
+        --heroui-primary-50: 172.5 66.1% 95%;
+        --heroui-primary-100: 172.5 66.1% 90%;
+        --heroui-primary-200: 172.5 66.1% 80%;
+        --heroui-primary-300: 172.5 66.1% 70%;
+        --heroui-primary-400: 172.5 66.1% 60%;
+        --heroui-primary-500: 172.5 66.1% 50%;
+        --heroui-primary-600: 172.5 66.1% 31.4%;
+        /* DEFAULT */
+        --heroui-primary-700: 172.5 66.1% 25%;
+        --heroui-primary-800: 172.5 66.1% 20%;
+        --heroui-primary-900: 172.5 66.1% 15%;
+        --heroui-primary-foreground: 0 0% 100%;
+    }
+
+    .dark {
+        --pfm-primary: #0D9488;
+        --pfm-primary-hover: #0F766E;
+        --pfm-secondary: #10B981;
+        --pfm-bg: #020617;
+        --pfm-card: rgba(30, 41, 59, 0.7);
+
+        --pfm-text: #F8FAFC;
+        --pfm-text-dark: #F8FAFC;
+        --pfm-text-light: #0F172A;
+        --pfm-text-muted: #94A3B8;
+        --pfm-border: rgba(51, 65, 85, 0.5);
+
+        /* HeroUI Overrides */
+        --heroui-primary: 172.5 66.1% 31.4%;
+        --heroui-primary-foreground: 0 0% 100%;
+    }
+
+    body {
+        background-color: var(--pfm-bg);
+        color: var(--pfm-text);
+        @apply font-inter antialiased;
+    }
+}
+
+@layer components {
+
+    /* Glassmorphism utility */
+    .glass {
+        @apply backdrop-blur-md border border-white/10 shadow-xl;
+        background-color: color-mix(in srgb, var(--pfm-card), transparent 30%);
+    }
+
+    /* Premium Buttons */
+    .pfm-btn-primary {
+        @apply bg-pfm-primary text-white font-bold rounded-xl px-6 py-3 shadow-lg shadow-pfm-primary/20 transition-all hover:bg-pfm-primary-hover hover:shadow-xl hover:-translate-y-0.5 active:scale-95;
+    }
+
+    .pfm-btn-secondary {
+        @apply bg-pfm-card/50 backdrop-blur-sm border border-pfm-border text-pfm-text font-semibold rounded-xl px-4 py-2 hover:bg-pfm-bg shadow-sm transition-all hover:-translate-y-0.5 active:scale-95;
+    }
+}
