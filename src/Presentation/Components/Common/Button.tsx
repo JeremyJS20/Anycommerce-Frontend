@@ -1,7 +1,8 @@
 import { Button as HeroUIButton, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Badge } from '@heroui/react';
 
 export interface ButtonConfig {
-    type?: "button" | "dropdown";
+    mode?: "button" | "dropdown";
+    type?: "button" | "submit" | "reset";
     dropdownItems?: { key: string; label: React.ReactNode }[];
     onDropdownAction?: (key: string) => void;
     variant?: "solid" | "bordered" | "light" | "flat" | "faded" | "shadow" | "ghost";
@@ -45,6 +46,7 @@ export const Button = ({ config }: ButtonProps) => {
             isDisabled={config.isDisabled}
             isLoading={config.isLoading}
             className={config.className}
+            type={config.type || "button"}
             onPress={config.onPress}
             onClick={config.onClick}
             title={config.title}
@@ -55,7 +57,7 @@ export const Button = ({ config }: ButtonProps) => {
 
     let finalComponent = buttonElement;
 
-    if (config.type === "dropdown" && config.dropdownItems) {
+    if (config.mode === "dropdown" && config.dropdownItems) {
         finalComponent = (
             <Dropdown
                 classNames={{

@@ -11,7 +11,7 @@ import { Input } from "./Common/Input";
 
 export const Navbar = () => {
     const { t } = useTranslation();
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated, user, logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -66,13 +66,25 @@ export const Navbar = () => {
                     {isAuthenticated ? (
                         <Button
                             config={{
-                                isIconOnly: true,
+                                mode: "dropdown",
                                 variant: "flat",
                                 color: "primary",
-                                className: "h-10 w-10 min-w-10 p-0 transition-all",
+                                className: "h-10 px-4 min-w-10 transition-all font-medium",
                                 title: t("nav.profile"),
-                                onClick: logout,
-                                children: <User size={20} className="text-pfm-primary" />
+                                children: (
+                                    <div className="flex items-center gap-2">
+                                        <User size={18} className="text-pfm-primary" />
+                                        <span className="hidden sm:inline text-pfm-primary">{user?.name}</span>
+                                    </div>
+                                ),
+                                dropdownItems: [
+                                    { key: "profile", label: t("nav.profile") },
+                                    { key: "logout", label: <span className="text-danger font-semibold">{t("auth.logout")}</span> }
+                                ],
+                                onDropdownAction: (key) => {
+                                    if (key === "logout") logout();
+                                    if (key === "profile") navigate('/profile');
+                                }
                             }}
                         />
                     ) : (
@@ -81,7 +93,7 @@ export const Navbar = () => {
                                 variant: "solid",
                                 className: "bg-pfm-primary text-white font-bold rounded-xl px-6 h-10 shadow-lg shadow-pfm-primary/20 transition-all hover:bg-pfm-primary-hover hover:shadow-xl hover:-translate-y-0.5 ml-2",
                                 onClick: () => navigate('/signin'),
-                                children: "Sign In"
+                                children: t("nav.sign_in")
                             }}
                         />
                     )}

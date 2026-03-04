@@ -8,6 +8,7 @@ export default heroui({
                     DEFAULT: "#0D9488",
                     foreground: "#FFFFFF",
                 },
+                focus: "#0D9488",
             },
         },
         dark: {
@@ -16,6 +17,7 @@ export default heroui({
                     DEFAULT: "#0D9488",
                     foreground: "#FFFFFF",
                 },
+                focus: "#0D9488",
             },
         },
     },

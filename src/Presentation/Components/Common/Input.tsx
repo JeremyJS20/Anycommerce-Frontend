@@ -19,6 +19,10 @@ export interface InputConfig {
     isDisabled?: boolean;
     isInvalid?: boolean;
     errorMessage?: string;
+    name?: string;
+    isRequired?: boolean;
+    isReadOnly?: boolean;
+    autoComplete?: string;
     classNames?: HeroUIInputProps['classNames'];
 }
 
@@ -45,6 +49,10 @@ export const Input = ({ config }: InputWrapperProps) => {
             isDisabled={config.isDisabled}
             isInvalid={config.isInvalid}
             errorMessage={config.errorMessage}
+            name={config.name}
+            isRequired={config.isRequired}
+            isReadOnly={config.isReadOnly}
+            autoComplete={config.autoComplete}
             classNames={config.classNames}
         />
     );

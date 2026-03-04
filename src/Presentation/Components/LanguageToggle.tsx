@@ -8,7 +8,7 @@ export const LanguageToggle = () => {
     return (
         <Button
             config={{
-                type: "dropdown",
+                mode: "dropdown",
                 isIconOnly: true,
                 variant: "flat",
                 color: "primary",

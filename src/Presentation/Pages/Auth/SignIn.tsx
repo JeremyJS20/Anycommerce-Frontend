@@ -1,11 +1,37 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@Presentation/Components/Common/Button';
 import { Input } from '@Presentation/Components/Common/Input';
 import { Logo } from '@Presentation/Components/Common/Logo';
+import { Alert } from '@Presentation/Components/Common/Alert';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '@Presentation/Context/AuthContext';
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 export const SignIn = () => {
     const { t } = useTranslation();
+    const { login } = useAuth();
+    const navigate = useNavigate();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setError(null);
+
+        const formData = new FormData(e.currentTarget);
+        try {
+            await login(formData);
+            navigate('/');
+        } catch (err) {
+            console.error(err);
+            const errorData = err as { error?: { description?: string } };
+            setError(errorData.error?.description || t('auth.login_failed'));
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-pfm-bg p-6 relative overflow-hidden">
@@ -24,18 +50,33 @@ export const SignIn = () => {
                     </p>
                 </div>
                 <div className="mt-10 sm:mx-auto sm:w-full">
-                    <form action="#" className="space-y-6" method="POST">
-                        {/* Email Input */}
+                    <AnimatePresence mode="wait">
+                        {error && (
+                            <div className="mb-10">
+                                <Alert
+                                    config={{
+                                        variant: "danger",
+                                        message: error,
+                                        onClose: () => setError(null)
+                                    }}
+                                />
+                            </div>
+                        )}
+                    </AnimatePresence>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Username Input */}
                         <div>
                             <Input
                                 config={{
-                                    type: "email",
-                                    label: t('auth.email_address'),
+                                    name: "username",
+                                    type: "text",
+                                    label: t('auth.username'),
                                     labelPlacement: "outside",
-                                    placeholder: t('auth.email_placeholder'),
+                                    placeholder: t('auth.username_placeholder'),
                                     variant: "bordered",
                                     radius: "lg",
                                     size: "lg",
+                                    isRequired: true,
                                     classNames: {
                                         inputWrapper: "bg-pfm-bg border-pfm-border hover:border-pfm-primary focus-within:border-pfm-primary transition-all shadow-sm",
                                         input: "text-pfm-text placeholder:text-pfm-text-muted/60",
@@ -57,12 +98,14 @@ export const SignIn = () => {
                             </div>
                             <Input
                                 config={{
+                                    name: "password",
                                     type: "password",
                                     labelPlacement: "outside",
                                     placeholder: "••••••••",
                                     variant: "bordered",
                                     radius: "lg",
                                     size: "lg",
+                                    isRequired: true,
                                     classNames: {
                                         inputWrapper: "bg-pfm-bg border-pfm-border hover:border-pfm-primary focus-within:border-pfm-primary transition-all shadow-sm",
                                         input: "text-pfm-text placeholder:text-pfm-text-muted/60",
@@ -75,8 +118,9 @@ export const SignIn = () => {
                         <div className="mt-10">
                             <Button
                                 config={{
-                                    type: "button",
+                                    type: "submit",
                                     variant: "solid",
+                                    isLoading: isSubmitting,
                                     className: "w-full bg-pfm-primary text-white font-bold rounded-xl px-6 h-12 shadow-lg shadow-pfm-primary/20 transition-all hover:bg-pfm-primary-hover hover:shadow-xl hover:-translate-y-1 active:scale-95 text-lg",
                                     children: t('auth.sign_in')
                                 }}
