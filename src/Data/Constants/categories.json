@@ -1,114 +1,114 @@
 [
     {
-        "name": "home.categories_data.electronics.name",
-        "description": "home.categories_data.electronics.description",
+        "name": "categories.electronics.name",
+        "description": "categories.electronics.description",
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAjmH41TIcA4h01_-KiuglCKO1aQrD02rCNGyjEoxkdr0K7EbUkpznLcTL2BirtiEEkPr425O-kiSTbV7IlQAkRQDb3yqt_fy0ra4M9bW5eCZGxCpEH4ahqu1oJX_s88s4NjTX67NPQuZdPx0sexRAV84o9IBCMCY6gYKuQELJpqKFzRAieh1u4K6zkAOvQjGTWSCFUmtdpetU5Es30TWVVAm1ip8C7mY0ryqaDO9YTY-U2UG5m5WlQzki5EPbTL8KE3h9zn35Hkckj",
         "subcategories": [
-            "home.categories_data.electronics.subcategories.smartphones",
-            "home.categories_data.electronics.subcategories.laptops",
-            "home.categories_data.electronics.subcategories.tablets",
-            "home.categories_data.electronics.subcategories.audio_headphones",
-            "home.categories_data.electronics.subcategories.cameras",
-            "home.categories_data.electronics.subcategories.wearable_tech",
-            "home.categories_data.electronics.subcategories.smart_home"
+            "categories.electronics.subcategories.smartphones",
+            "categories.electronics.subcategories.laptops",
+            "categories.electronics.subcategories.tablets",
+            "categories.electronics.subcategories.audio_headphones",
+            "categories.electronics.subcategories.cameras",
+            "categories.electronics.subcategories.wearable_tech",
+            "categories.electronics.subcategories.smart_home"
         ]
     },
     {
-        "name": "home.categories_data.fashion.name",
-        "description": "home.categories_data.fashion.description",
+        "name": "categories.fashion.name",
+        "description": "categories.fashion.description",
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBWDkmmER5yefymv_-j_MWyGsKLS5-_lpEQAa_3u2nykxOkksS_vDODm9rEKEwfI9ewzAkVyae9fW89W_vq-vry8y_DNpXBhEMHMZNLBktqab0dsK6S5l5bMkEWBn2OV9U2wIZefIP5j_TezR3mXYENsjdZY6aNc0Vrk0Cwn9jEMs02_JkcfbKudwNeGVuRd4QkLugfZtHDqUOEOPVNJvKz-acPHxsOGaVoQSiJuzzITRUATad2D3aoEemEBo8Xj3JLAPhoepif-XN8",
         "subcategories": [
-            "home.categories_data.fashion.subcategories.mens_clothing",
-            "home.categories_data.fashion.subcategories.womens_clothing",
-            "home.categories_data.fashion.subcategories.kids_clothing",
-            "home.categories_data.fashion.subcategories.shoes",
-            "home.categories_data.fashion.subcategories.watches",
-            "home.categories_data.fashion.subcategories.bags_wallets",
-            "home.categories_data.fashion.subcategories.jewelry"
+            "categories.fashion.subcategories.mens_clothing",
+            "categories.fashion.subcategories.womens_clothing",
+            "categories.fashion.subcategories.kids_clothing",
+            "categories.fashion.subcategories.shoes",
+            "categories.fashion.subcategories.watches",
+            "categories.fashion.subcategories.bags_wallets",
+            "categories.fashion.subcategories.jewelry"
         ]
     },
     {
-        "name": "home.categories_data.home_garden.name",
-        "description": "home.categories_data.home_garden.description",
+        "name": "categories.home_garden.name",
+        "description": "categories.home_garden.description",
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA5Aj24JqVO8TiC2PHP9kRmVkvs_Uk0YtRZm37Lq_SoRfTC44Fvt-Imn4snEDS_geuML6nNhRe2znjYtdPBxBBLLb6YDuHpB-RBGpzAb_SsKqgiJoqXXbtPWUXxE1Vci8hIe2tbxo-smUJmCpwXW4nZB__A3btnMm-2GHERMj-h4mnKpzzfBLeH8-duIaSRZsRe_YwRnlZFyy-gT5FkxiEiuMNuAOP_kp-dLqjeZ3DFlyMZbjKi5GPw5b0a34P47yIaLUn-q6Rxo7V-",
         "subcategories": [
-            "home.categories_data.home_garden.subcategories.furniture",
-            "home.categories_data.home_garden.subcategories.kitchenware",
-            "home.categories_data.home_garden.subcategories.bedding_bath",
-            "home.categories_data.home_garden.subcategories.home_decor",
-            "home.categories_data.home_garden.subcategories.garden_tools",
-            "home.categories_data.home_garden.subcategories.patio_furniture",
-            "home.categories_data.home_garden.subcategories.lighting"
+            "categories.home_garden.subcategories.furniture",
+            "categories.home_garden.subcategories.kitchenware",
+            "categories.home_garden.subcategories.bedding_bath",
+            "categories.home_garden.subcategories.home_decor",
+            "categories.home_garden.subcategories.garden_tools",
+            "categories.home_garden.subcategories.patio_furniture",
+            "categories.home_garden.subcategories.lighting"
         ]
     },
     {
-        "name": "home.categories_data.health_beauty.name",
-        "description": "home.categories_data.health_beauty.description",
+        "name": "categories.health_beauty.name",
+        "description": "categories.health_beauty.description",
         "image": "https://images.unsplash.com/photo-1596461404969-9ae70bd297df?q=80&w=2070&auto=format&fit=crop",
         "subcategories": [
-            "home.categories_data.health_beauty.subcategories.skincare",
-            "home.categories_data.health_beauty.subcategories.makeup",
-            "home.categories_data.health_beauty.subcategories.haircare",
-            "home.categories_data.health_beauty.subcategories.fragrances",
-            "home.categories_data.health_beauty.subcategories.personal_care",
-            "home.categories_data.health_beauty.subcategories.vitamins_supplements",
-            "home.categories_data.health_beauty.subcategories.grooming"
+            "categories.health_beauty.subcategories.skincare",
+            "categories.health_beauty.subcategories.makeup",
+            "categories.health_beauty.subcategories.haircare",
+            "categories.health_beauty.subcategories.fragrances",
+            "categories.health_beauty.subcategories.personal_care",
+            "categories.health_beauty.subcategories.vitamins_supplements",
+            "categories.health_beauty.subcategories.grooming"
         ]
     },
     {
-        "name": "home.categories_data.sports_outdoors.name",
-        "description": "home.categories_data.sports_outdoors.description",
+        "name": "categories.sports_outdoors.name",
+        "description": "categories.sports_outdoors.description",
         "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop",
         "subcategories": [
-            "home.categories_data.sports_outdoors.subcategories.exercise_fitness",
-            "home.categories_data.sports_outdoors.subcategories.cycling",
-            "home.categories_data.sports_outdoors.subcategories.camping_hiking",
-            "home.categories_data.sports_outdoors.subcategories.water_sports",
-            "home.categories_data.sports_outdoors.subcategories.team_sports",
-            "home.categories_data.sports_outdoors.subcategories.outdoor_clothing",
-            "home.categories_data.sports_outdoors.subcategories.footwear"
+            "categories.sports_outdoors.subcategories.exercise_fitness",
+            "categories.sports_outdoors.subcategories.cycling",
+            "categories.sports_outdoors.subcategories.camping_hiking",
+            "categories.sports_outdoors.subcategories.water_sports",
+            "categories.sports_outdoors.subcategories.team_sports",
+            "categories.sports_outdoors.subcategories.outdoor_clothing",
+            "categories.sports_outdoors.subcategories.footwear"
         ]
     },
     {
-        "name": "home.categories_data.toys_hobbies.name",
-        "description": "home.categories_data.toys_hobbies.description",
+        "name": "categories.toys_hobbies.name",
+        "description": "categories.toys_hobbies.description",
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCPkccoSXVjQkHSX9xt9WfsBG0WH2tq1IwdZd8dA4-Ieezk9GZHcq3cAC8uE_W671LYRhhgoBGStSBmselnBxOhN2tJl9dgH6EK3j9QYCEQBrAjUno_K9IYDOuyEn5Gn2Z49t5uvVOHr5Ebb_obmVnebwIGz_11H8dPH4Ey4ouY8ahwLYX7qO23qNX4SK3bgjYP2uCUMRYAx0l5SEtB_4z_IiUKz567HMORptNhsERB4XAbAkILckC4bmB6_0M8X4J8zbUiA1B3637-",
         "subcategories": [
-            "home.categories_data.toys_hobbies.subcategories.action_figures",
-            "home.categories_data.toys_hobbies.subcategories.board_games_puzzles",
-            "home.categories_data.toys_hobbies.subcategories.dolls_teddy_bears",
-            "home.categories_data.toys_hobbies.subcategories.educational_toys",
-            "home.categories_data.toys_hobbies.subcategories.model_kits",
-            "home.categories_data.toys_hobbies.subcategories.rc_vehicles",
-            "home.categories_data.toys_hobbies.subcategories.art_crafts"
+            "categories.toys_hobbies.subcategories.action_figures",
+            "categories.toys_hobbies.subcategories.board_games_puzzles",
+            "categories.toys_hobbies.subcategories.dolls_teddy_bears",
+            "categories.toys_hobbies.subcategories.educational_toys",
+            "categories.toys_hobbies.subcategories.model_kits",
+            "categories.toys_hobbies.subcategories.rc_vehicles",
+            "categories.toys_hobbies.subcategories.art_crafts"
         ]
     },
     {
-        "name": "home.categories_data.automotive.name",
-        "description": "home.categories_data.automotive.description",
+        "name": "categories.automotive.name",
+        "description": "categories.automotive.description",
         "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1983&auto=format&fit=crop",
         "subcategories": [
-            "home.categories_data.automotive.subcategories.car_electronics",
-            "home.categories_data.automotive.subcategories.tools_equipment",
-            "home.categories_data.automotive.subcategories.interior_accessories",
-            "home.categories_data.automotive.subcategories.exterior_accessories",
-            "home.categories_data.automotive.subcategories.car_care",
-            "home.categories_data.automotive.subcategories.tires_wheels",
-            "home.categories_data.automotive.subcategories.replacement_parts"
+            "categories.automotive.subcategories.car_electronics",
+            "categories.automotive.subcategories.tools_equipment",
+            "categories.automotive.subcategories.interior_accessories",
+            "categories.automotive.subcategories.exterior_accessories",
+            "categories.automotive.subcategories.car_care",
+            "categories.automotive.subcategories.tires_wheels",
+            "categories.automotive.subcategories.replacement_parts"
         ]
     },
     {
-        "name": "home.categories_data.books_stationery.name",
-        "description": "home.categories_data.books_stationery.description",
+        "name": "categories.books_stationery.name",
+        "description": "categories.books_stationery.description",
         "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1973&auto=format&fit=crop",
         "subcategories": [
-            "home.categories_data.books_stationery.subcategories.fiction",
-            "home.categories_data.books_stationery.subcategories.non_fiction",
-            "home.categories_data.books_stationery.subcategories.childrens_books",
-            "home.categories_data.books_stationery.subcategories.education_textbooks",
-            "home.categories_data.books_stationery.subcategories.notebooks_planners",
-            "home.categories_data.books_stationery.subcategories.writing_instruments",
-            "home.categories_data.books_stationery.subcategories.office_supplies"
+            "categories.books_stationery.subcategories.fiction",
+            "categories.books_stationery.subcategories.non_fiction",
+            "categories.books_stationery.subcategories.childrens_books",
+            "categories.books_stationery.subcategories.education_textbooks",
+            "categories.books_stationery.subcategories.notebooks_planners",
+            "categories.books_stationery.subcategories.writing_instruments",
+            "categories.books_stationery.subcategories.office_supplies"
         ]
     }
 ]

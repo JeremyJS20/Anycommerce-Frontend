@@ -11,6 +11,7 @@ import { productService } from '@Infrastructure/Services/Product.service';
 import type { Category } from '@Domain/Entities/catalog';
 import type { Product } from '@Domain/Entities/product';
 import categoriesData from '@Data/Constants/categories.json';
+import { getCategoryTranslationKey, getCategoryDescriptionKey, getCategoryTranslationSlug } from '@Presentation/Utils/translationUtils';
 
 export const Home = () => {
     const { t } = useTranslation();
@@ -25,7 +26,10 @@ export const Home = () => {
                 const data = await catalogService.getCategories();
                 // Map images from local json if backend doesn't provide them
                 const mappedCategories = data.map(cat => {
-                    const localMatch = categoriesData.find(lc => lc.name === cat.name);
+                    const slug = getCategoryTranslationSlug(cat.name);
+                    const localMatch = categoriesData.find(lc =>
+                        lc.name.includes(slug) || cat.name.toLowerCase() === lc.name.toLowerCase()
+                    );
                     return {
                         ...cat,
                         image: cat.image || localMatch?.image || ''
@@ -114,6 +118,7 @@ export const Home = () => {
                                 className: "h-16 px-12 text-xl font-bold rounded-2xl",
                                 variant: "solid",
                                 color: "primary",
+                                onClick: () => navigate('/products'),
                                 children: (
                                     <div className="flex items-center gap-2">
                                         <span>{t("home.hero.cta_buy")}</span>
@@ -143,7 +148,7 @@ export const Home = () => {
                         viewport={{ once: true }}
                         className="mb-12 text-3xl font-bold tracking-tight text-pfm-text dark:text-pfm-text-dark"
                     >
-                        {t("home.categories_data.title")}
+                        {t("categories.title")}
                     </motion.h2>
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:gap-8">
                         {categories.map((cat, index) => (
@@ -151,8 +156,8 @@ export const Home = () => {
                                 key={cat.id}
                                 id={cat.id}
                                 index={index}
-                                title={t(cat.name)}
-                                description={t(cat.description)}
+                                title={t(getCategoryTranslationKey(cat.name), cat.name)}
+                                description={t(getCategoryDescriptionKey(cat.name), cat.description)}
                                 image={cat.image || ''}
                             />
                         ))}

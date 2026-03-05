@@ -26,15 +26,19 @@ class HttpClient {
     }
 
     private handleError(e: unknown): never {
-        const err = e as { response?: { status?: number; data?: { error?: unknown } }; message?: string };
+        const err = e as { response?: { status?: number; data?: { error?: Record<string, unknown> } }; message?: string };
+        const rawError = err.response?.data?.error;
+
         const error: errorResponseType = {
             success: false,
             statusCode: err.response?.status || 500,
-            error: err.response?.data?.error || {
-                errorId: 500,
-                description: err.message || "Unknown error",
-                details: (err.response?.data as Record<string, unknown>) || null
-            },
+            error: (rawError && typeof rawError === 'object' && 'errorId' in rawError)
+                ? (rawError as unknown as errorResponseType['error'])
+                : {
+                    errorId: 500,
+                    description: err.message || "Unknown error",
+                    details: (err.response?.data as Record<string, unknown>) || null
+                },
         };
         throw error;
     }
@@ -51,7 +55,7 @@ class HttpClient {
             return {
                 success: true,
                 statusCode: result.status,
-                data: result.data.data,
+                data: result.data.data !== undefined ? result.data.data : result.data,
             };
         } catch (e) {
             throw this.handleError(e);
@@ -70,7 +74,7 @@ class HttpClient {
             return {
                 success: true,
                 statusCode: result.status,
-                data: result.data.data,
+                data: result.data.data !== undefined ? result.data.data : result.data,
                 additionalData: result.data.additionalData,
             };
         } catch (e) {
@@ -93,7 +97,7 @@ class HttpClient {
             return {
                 success: true,
                 statusCode: result.status,
-                data: result.data.data,
+                data: result.data.data !== undefined ? result.data.data : result.data,
             };
         } catch (e) {
             throw this.handleError(e);
@@ -115,7 +119,7 @@ class HttpClient {
             return {
                 success: true,
                 statusCode: result.status,
-                data: result.data.data,
+                data: result.data.data !== undefined ? result.data.data : result.data,
             };
         } catch (e) {
             throw this.handleError(e);
@@ -134,7 +138,7 @@ class HttpClient {
             return {
                 success: true,
                 statusCode: result.status,
-                data: result.data.data,
+                data: result.data.data !== undefined ? result.data.data : result.data,
             };
         } catch (e) {
             throw this.handleError(e);

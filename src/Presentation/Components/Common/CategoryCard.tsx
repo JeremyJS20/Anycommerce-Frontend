@@ -18,10 +18,6 @@ export const CategoryCard = ({ id, image, title, description, index }: CategoryC
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
             className="group cursor-pointer transition-all duration-300 hover:-translate-y-2"
             onClick={handleClick}
         >

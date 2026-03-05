@@ -9,7 +9,8 @@ export type Product = {
     cost: number;
     currency: string;
     stock: number;
-    category: string;
+    categoryId: string;
+    categoryName: string;
     subcategory: string;
     rating: number | null;
     imgs: MediaModel[] | null;
