@@ -344,7 +344,11 @@ export const Products = () => {
                                 <span className="text-xs font-bold uppercase tracking-wider text-pfm-text-muted shrink-0">
                                     {t('products.grid.sort_by', 'Sort by:')}
                                 </span>
-                                <Dropdown>
+                                <Dropdown
+                                    classNames={{
+                                        content: "bg-pfm-card border border-pfm-border min-w-[200px] shadow-xl rounded-xl p-1"
+                                    }}
+                                >
                                     <DropdownTrigger>
                                         <Button
                                             config={{
@@ -362,16 +366,38 @@ export const Products = () => {
                                     <DropdownMenu
                                         aria-label="Sort options"
                                         onAction={handleSortChange}
-                                        selectedKeys={[sortFilter]}
+                                        selectedKeys={new Set([sortFilter])}
                                         selectionMode="single"
-                                        className="min-w-[200px]"
+                                        itemClasses={{
+                                            base: [
+                                                "flex",
+                                                "w-full",
+                                                "items-center",
+                                                "gap-2",
+                                                "px-3",
+                                                "py-2",
+                                                "rounded-lg",
+                                                "transition-colors",
+                                                "text-pfm-text",
+                                                "dark:text-pfm-text-dark",
+                                                "outline-none",
+                                                "data-[hover=true]:!bg-pfm-primary/10",
+                                                "data-[hover=true]:!text-pfm-primary",
+                                                "data-[focus=true]:!bg-pfm-primary/10",
+                                                "data-[focus=true]:!text-pfm-primary",
+                                                "data-[pressed=true]:!bg-pfm-primary/20",
+                                                "data-[selected=true]:!bg-pfm-primary/20",
+                                                "data-[selected=true]:!text-pfm-primary",
+                                                "data-[selected=true]:font-bold",
+                                            ].join(" "),
+                                        }}
                                     >
-                                        <DropdownItem key="newest" className="text-sm font-medium">{t('products.sort.newest', 'Newest')}</DropdownItem>
-                                        <DropdownItem key="priceAsc" className="text-sm font-medium">{t('products.sort.price_asc', 'Price: Low to High')}</DropdownItem>
-                                        <DropdownItem key="priceDesc" className="text-sm font-medium">{t('products.sort.price_desc', 'Price: High to Low')}</DropdownItem>
-                                        <DropdownItem key="alphabeticallyAsc" className="text-sm font-medium">{t('products.sort.alphabetical_asc', 'A-Z')}</DropdownItem>
-                                        <DropdownItem key="alphabeticallyDesc" className="text-sm font-medium">{t('products.sort.alphabetical_desc', 'Z-A')}</DropdownItem>
-                                        <DropdownItem key="ratingDesc" className="text-sm font-medium">{t('products.sort.rating_desc', 'Highest Rated')}</DropdownItem>
+                                        <DropdownItem key="newest">{t('products.sort.newest', 'Newest')}</DropdownItem>
+                                        <DropdownItem key="priceAsc">{t('products.sort.price_asc', 'Price: Low to High')}</DropdownItem>
+                                        <DropdownItem key="priceDesc">{t('products.sort.price_desc', 'Price: High to Low')}</DropdownItem>
+                                        <DropdownItem key="alphabeticallyAsc">{t('products.sort.alphabetical_asc', 'A-Z')}</DropdownItem>
+                                        <DropdownItem key="alphabeticallyDesc">{t('products.sort.alphabetical_desc', 'Z-A')}</DropdownItem>
+                                        <DropdownItem key="ratingDesc">{t('products.sort.rating_desc', 'Highest Rated')}</DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
                             </div>

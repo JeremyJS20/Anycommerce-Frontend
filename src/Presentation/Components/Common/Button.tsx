@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { Button as HeroUIButton, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Badge } from '@heroui/react';
 
 export interface ButtonConfig {
@@ -29,13 +30,13 @@ export interface ButtonConfig {
     };
 }
 
-interface ButtonProps {
-    config: ButtonConfig;
-}
 
-export const Button = ({ config }: ButtonProps) => {
+
+export const Button = forwardRef<HTMLButtonElement, any>(({ config, ...props }, ref) => {
     const buttonElement = (
         <HeroUIButton
+            ref={ref}
+            {...props}
             variant={config.variant}
             color={config.color}
             size={config.size}
@@ -46,12 +47,12 @@ export const Button = ({ config }: ButtonProps) => {
             isDisabled={config.isDisabled}
             isLoading={config.isLoading}
             className={config.className}
-            type={config.type || "button"}
+            type={config.type || props.type || "button"}
             onPress={config.onPress}
-            onClick={config.onClick}
+            onClick={config.onClick || props.onClick}
             title={config.title}
         >
-            {config.children}
+            {config.children || props.children}
         </HeroUIButton>
     );
 
@@ -74,7 +75,7 @@ export const Button = ({ config }: ButtonProps) => {
                         base: "data-[hover=true]:bg-pfm-primary/10 data-[hover=true]:text-pfm-primary text-pfm-text rounded-lg py-2 px-3 transition-colors",
                     }}
                 >
-                    {config.dropdownItems.map((item) => (
+                    {config.dropdownItems.map((item: any) => (
                         <DropdownItem key={item.key} className="text-sm font-medium">
                             {item.label}
                         </DropdownItem>
@@ -100,4 +101,6 @@ export const Button = ({ config }: ButtonProps) => {
     }
 
     return finalComponent;
-};
+});
+
+Button.displayName = "Button";
