@@ -84,7 +84,7 @@ export const Home = () => {
     return (
         <div className="flex flex-col w-full overflow-x-hidden">
             {/* Hero Section */}
-            <section className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-32 w-full flex flex-col items-center justify-center text-center">
+            <section className="mx-auto max-w-7xl px-6 py-20 md:px-20 lg:py-32 w-full flex flex-col items-center justify-center text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ export const Home = () => {
                         >
                             {t("home.hero.badge")}
                         </motion.div>
-                        <h1 className="text-5xl font-black leading-tight tracking-tight text-pfm-text dark:text-pfm-text-dark md:text-7xl lg:text-8xl lg:leading-[1.1] max-w-5xl">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tighter text-pfm-text dark:text-pfm-text-dark lg:leading-[1.1] max-w-5xl">
                             {t("home.hero.title").split(t("home.hero.highlight")).map((part, i, arr) => (
                                 <span key={i}>
                                     {part}
@@ -115,21 +115,21 @@ export const Home = () => {
                     <div className="flex flex-wrap gap-6 justify-center">
                         <Button
                             config={{
-                                className: "h-16 px-12 text-xl font-bold rounded-2xl",
+                                className: "h-14 px-10 text-lg font-bold rounded-xl",
                                 variant: "solid",
                                 color: "primary",
                                 onClick: () => navigate('/products'),
                                 children: (
                                     <div className="flex items-center gap-2">
                                         <span>{t("home.hero.cta_buy")}</span>
-                                        <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+                                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 )
                             }}
                         />
                         <Button
                             config={{
-                                className: "h-16 px-12 text-xl font-semibold border-2 border-pfm-primary/20 rounded-2xl",
+                                className: "h-14 px-10 text-lg font-semibold border-2 border-pfm-primary/20 rounded-xl",
                                 variant: "bordered",
                                 color: "primary",
                                 children: t("home.hero.cta_sell")
@@ -146,7 +146,7 @@ export const Home = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="mb-12 text-3xl font-bold tracking-tight text-pfm-text dark:text-pfm-text-dark"
+                        className="mb-12 text-2xl md:text-3xl font-bold tracking-tight text-pfm-text dark:text-pfm-text-dark"
                     >
                         {t("categories.title")}
                     </motion.h2>
@@ -173,7 +173,7 @@ export const Home = () => {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="text-3xl font-bold tracking-tight text-pfm-text dark:text-pfm-text-dark"
+                            className="text-2xl md:text-3xl font-bold tracking-tight text-pfm-text dark:text-pfm-text-dark"
                         >
                             {t("home.new_arrivals.title")}
                         </motion.h2>
@@ -194,9 +194,12 @@ export const Home = () => {
                                 id={product.id}
                                 index={index}
                                 title={product.name}
+                                category={product.categoryName}
                                 price={`${product.currency === 'USD' ? '$' : product.currency} ${product.cost.toFixed(2)}`}
                                 image={product.imgs?.[0]?.url || 'https://via.placeholder.com/400'}
+                                rating={product.rating ?? undefined}
                                 isNew={true}
+                                product={product}
                             />
                         ))}
                     </div>
@@ -206,7 +209,7 @@ export const Home = () => {
             {/* Flash Sale Section */}
             <section className="w-full bg-pfm-primary py-16 text-white overflow-hidden relative">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -mr-48 -mt-48 animate-pulse" />
-                <div className="mx-auto max-w-7xl px-6 lg:px-12 relative z-10">
+                <div className="mx-auto max-w-7xl px-6 md:px-20 relative z-10">
                     <div className="flex flex-col items-center justify-between gap-10 md:flex-row">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -214,7 +217,7 @@ export const Home = () => {
                             viewport={{ once: true }}
                             className="flex flex-col gap-3 text-center md:text-left"
                         >
-                            <h2 className="text-4xl md:text-5xl font-black tracking-tight">{t("home.flash_sale.title")}</h2>
+                            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">{t("home.flash_sale.title")}</h2>
                             <p className="text-xl text-white/80 max-w-xl">{t("home.flash_sale.description")}</p>
                         </motion.div>
 
@@ -227,14 +230,14 @@ export const Home = () => {
                             >
                                 <div className="flex gap-2 items-baseline">
                                     <Clock size={20} className="text-white/70" />
-                                    <span className="text-4xl font-black tracking-widest tabular-nums font-mono">12:45:00</span>
+                                    <span className="text-3xl font-extrabold tracking-widest tabular-nums font-mono">12:45:00</span>
                                 </div>
                                 <span className="text-xs uppercase tracking-widest mt-1 font-bold opacity-70">{t("home.flash_sale.timer_label")}</span>
                             </motion.div>
 
                             <Button
                                 config={{
-                                    className: "h-14 px-12 text-lg bg-white text-pfm-primary hover:bg-white/90 font-black rounded-full shadow-2xl",
+                                    className: "h-14 px-12 text-lg bg-white text-pfm-primary hover:bg-white/90 font-bold rounded-full shadow-2xl",
                                     children: t("home.flash_sale.cta")
                                 }}
                             />
@@ -250,7 +253,7 @@ export const Home = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="mb-12 text-3xl font-bold tracking-tight text-pfm-text dark:text-pfm-text-dark"
+                        className="mb-12 text-2xl md:text-3xl font-bold tracking-tight text-pfm-text dark:text-pfm-text-dark"
                     >
                         {t("home.best_sellers.title")}
                     </motion.h2>
@@ -261,10 +264,12 @@ export const Home = () => {
                                 id={product.id}
                                 index={index}
                                 title={product.name}
+                                category={product.categoryName}
                                 price={`${product.currency === 'USD' ? '$' : product.currency} ${product.cost.toFixed(2)}`}
                                 image={product.imgs?.[0]?.url || 'https://via.placeholder.com/400'}
-                                rating={product.rating || 0}
+                                rating={product.rating ?? undefined}
                                 reviews={0}
+                                product={product}
                             />
                         ))}
                     </div>
@@ -272,13 +277,13 @@ export const Home = () => {
             </section>
 
             {/* Why Choose Section */}
-            <section className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
+            <section className="mx-auto max-w-7xl px-6 py-24 md:px-20">
                 <div className="mb-16 flex flex-col gap-4 text-center">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl font-black text-pfm-text dark:text-pfm-text-dark md:text-5xl"
+                        className="text-3xl font-extrabold text-pfm-text dark:text-pfm-text-dark md:text-4xl"
                     >
                         {t("home.features.title")}
                     </motion.h2>

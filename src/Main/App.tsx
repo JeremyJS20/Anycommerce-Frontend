@@ -1,16 +1,19 @@
-import { HeroUIProvider } from '@heroui/react'
+import { HeroUIProvider, ToastProvider } from '@heroui/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Navbar } from '@Presentation/Components/Navbar'
 import { Footer } from '@Presentation/Components/Footer'
 import { ThemeProvider } from '@Presentation/Context/ThemeContext'
 import { LanguageProvider } from '@Presentation/Context/LanguageContext'
 import { AuthProvider, useAuth } from '@Presentation/Context/AuthContext'
+import { CartProvider } from '@Presentation/Context/CartContext'
 import { Home } from '@Presentation/Pages/Home'
 import { SignIn } from '@Presentation/Pages/Auth/SignIn'
 import { Products } from '@Presentation/Pages/Products'
 import { ProductDetails } from '@Presentation/Pages/ProductDetails'
+import { StoreDetails } from '@Presentation/Pages/StoreDetails'
 import { motion } from 'framer-motion';
 import { Logo } from '@Presentation/Components/Common/Logo';
+import { CartDrawer } from '@Presentation/Components/CartDrawer';
 
 const AppContent = () => {
     const { loading } = useAuth();
@@ -55,6 +58,7 @@ const AppContent = () => {
     return (
         <div className="min-h-screen flex flex-col bg-pfm-bg transition-colors duration-300">
             <Navbar />
+            <CartDrawer />
 
             <main className="flex-grow">
                 <Routes>
@@ -62,6 +66,7 @@ const AppContent = () => {
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/product/:productId" element={<ProductDetails />} />
+                    <Route path="/store/:storeId" element={<StoreDetails />} />
                 </Routes>
             </main>
 
@@ -75,11 +80,14 @@ function App() {
         <AuthProvider>
             <ThemeProvider>
                 <LanguageProvider>
-                    <HeroUIProvider>
-                        <BrowserRouter>
-                            <AppContent />
-                        </BrowserRouter>
-                    </HeroUIProvider>
+                    <CartProvider>
+                        <HeroUIProvider>
+                            <ToastProvider />
+                            <BrowserRouter>
+                                <AppContent />
+                            </BrowserRouter>
+                        </HeroUIProvider>
+                    </CartProvider>
                 </LanguageProvider>
             </ThemeProvider>
         </AuthProvider>

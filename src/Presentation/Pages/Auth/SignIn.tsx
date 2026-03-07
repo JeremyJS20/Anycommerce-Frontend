@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@Presentation/Components/Common/Button';
 import { Input } from '@Presentation/Components/Common/Input';
 import { Logo } from '@Presentation/Components/Common/Logo';
@@ -13,6 +13,10 @@ export const SignIn = () => {
     const { t } = useTranslation();
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
+
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -27,7 +31,7 @@ export const SignIn = () => {
         const formData = new FormData(e.currentTarget);
         try {
             await login(formData);
-            navigate('/');
+            navigate(from, { replace: true });
         } catch (err) {
             console.error(err);
             const errorData = err as { error?: { description?: string } };

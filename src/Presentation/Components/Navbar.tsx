@@ -6,12 +6,14 @@ import { LanguageToggle } from "./LanguageToggle";
 import { useAuth } from "../Context/AuthContext";
 import { Button } from "./Common/Button";
 import { Logo } from "./Common/Logo";
+import { useCart } from "../Context/CartContext";
 
 import { Input } from "./Common/Input";
 
 export const Navbar = () => {
     const { t } = useTranslation();
     const { isAuthenticated, user, logout } = useAuth();
+    const { totalItems, toggleCart } = useCart();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -54,9 +56,10 @@ export const Navbar = () => {
                             color: "primary",
                             className: "h-10 w-10 min-w-10 p-0 transition-all",
                             title: t("nav.cart"),
+                            onClick: () => toggleCart(true),
                             children: <ShoppingBag size={20} className="text-pfm-primary" />,
                             badge: {
-                                content: "0",
+                                content: totalItems.toString(),
                                 color: "primary",
                                 size: "sm"
                             }
@@ -81,7 +84,7 @@ export const Navbar = () => {
                                     { key: "profile", label: t("nav.profile") },
                                     { key: "logout", label: <span className="text-danger font-semibold">{t("auth.logout")}</span> }
                                 ],
-                                onDropdownAction: (key) => {
+                                onDropdownAction: (key: string | number) => {
                                     if (key === "logout") logout();
                                     if (key === "profile") navigate('/profile');
                                 }
@@ -92,7 +95,7 @@ export const Navbar = () => {
                             config={{
                                 variant: "solid",
                                 className: "bg-pfm-primary text-white font-bold rounded-xl px-6 h-10 shadow-lg shadow-pfm-primary/20 transition-all hover:bg-pfm-primary-hover hover:shadow-xl hover:-translate-y-0.5 ml-2",
-                                onClick: () => navigate('/signin'),
+                                onClick: () => navigate('/signin', { state: { from: location } }),
                                 children: t("nav.sign_in")
                             }}
                         />

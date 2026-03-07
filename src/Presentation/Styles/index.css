@@ -23,6 +23,7 @@
     --color-focus: var(--pfm-primary);
 
     /* Font */
+    --font-sans: "Inter", sans-serif;
     --font-inter: "Inter", sans-serif;
 
     /* Screen Definitions */
@@ -84,7 +85,14 @@
     body {
         background-color: var(--pfm-bg);
         color: var(--pfm-text);
-        @apply font-inter antialiased;
+        font-feature-settings: 'cv11', 'ss01', 'ss03', 'cv05', 'cv08', 'cv09';
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        @apply font-sans;
+    }
+
+    h1, h2, h3, h4 {
+        @apply tracking-tight;
     }
 }
 

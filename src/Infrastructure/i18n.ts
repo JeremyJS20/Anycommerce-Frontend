@@ -10,6 +10,11 @@ const resources = {
                 "profile": "Profile",
                 "sign_in": "Sign In"
             },
+            "common": {
+                "error": "Something went wrong",
+                "retry": "Try Again",
+                "back": "Back"
+            },
             "auth": {
                 "welcome_back": "Welcome Back!",
                 "enter_details": "Please enter your details to sign in to your account.",
@@ -210,6 +215,80 @@ const resources = {
                     "no_results": "No products found matching your criteria.",
                     "view_all": "View all products"
                 }
+            },
+            "product": {
+                "not_found": "Product not found.",
+                "back_to_shop": "Back to Shop",
+                "in_stock": "+{{count}} units available",
+                "out_of_stock": "Out of stock",
+                "quantity": "Quantity",
+                "max_units": "Maximum availability reached",
+                "add_to_cart": "Add to Cart",
+                "buy_now": "Buy Now",
+                "shipping_info": "Free express delivery",
+                "warranty_info": "2 Year Warranty",
+                "overview": "Product Overview",
+                "specs": "Technical Characteristics",
+                "feature_1": "High-performance components engineered for excellence",
+                "feature_2": "Advanced thermal management for sustained performance",
+                "feature_3": "Premium design and build quality for long-lasting durability",
+                "tabs": {
+                    "details": "Details",
+                    "reviews": "Reviews",
+                    "shipping": "Shipping & Returns"
+                },
+                "reviews": {
+                    "empty_title": "No reviews yet",
+                    "empty_desc": "Be the first to share your experience with this product.",
+                    "write": "Write a Review"
+                },
+                "shipping": {
+                    "delivery_title": "Global Express Shipping",
+                    "returns_title": "Hassle-Free Returns"
+                },
+                "colors": "Colors",
+                "color": "Color",
+                "size": "Size",
+                "sizes": "Sizes"
+            },
+            "cart_drawer": {
+                "title": "Shopping Cart",
+                "empty_title": "Your cart is empty",
+                "empty_desc": "Looks like you haven't added anything to your cart yet.",
+                "subtotal": "Subtotal",
+                "shipping": "Shipping",
+                "free": "FREE",
+                "total": "Total",
+                "checkout": "Proceed to Checkout",
+                "continue": "Continue Shopping"
+            },
+            "toast": {
+                "success_title": "Success!",
+                "info_title": "Information",
+                "warning_title": "Warning",
+                "error_title": "Error",
+                "cart_added": "{{quantity}} x {{product}} added to cart.",
+                "cart_cleared_title": "Cart cleared",
+                "cart_cleared": "Your shopping bag is now empty.",
+                "login_success_title": "Welcome back!",
+                "login_success": "Logged in as {{name}}",
+                "login_error_title": "Login failed",
+                "login_error_desc": "Please check your credentials.",
+                "logout_title": "Logged out",
+                "logout_success": "You have been successfully signed out."
+            },
+            "store_info": {
+                "official_store": "Official Store",
+                "visit_store": "Visit Store",
+                "follow": "Follow",
+                "store_desc": "Your premier destination for high-end electronics and gaming gear. We specialize in bringing the latest tech breakthroughs directly to your doorstep with guaranteed authenticity and superior support.",
+                "shipping_fast": "Fast Shipping Worldwide",
+                "secure_payments": "100% Secure Payments",
+                "easy_returns": "30-Day Easy Returns"
+            },
+            "similar_items": {
+                "title": "Similar Items",
+                "view_all": "View All"
             }
         }
     },
@@ -220,6 +299,11 @@ const resources = {
                 "cart": "Carrito",
                 "profile": "Perfil",
                 "sign_in": "Iniciar Sesión"
+            },
+            "common": {
+                "error": "Algo salió mal",
+                "retry": "Reintentar",
+                "back": "Volver"
             },
             "auth": {
                 "welcome_back": "¡Bienvenido de nuevo!",
@@ -421,20 +505,100 @@ const resources = {
                     "no_results": "No se encontraron productos con estos criterios.",
                     "view_all": "Ver todos los productos"
                 }
+            },
+            "product": {
+                "not_found": "Producto no encontrado.",
+                "back_to_shop": "Volver a la tienda",
+                "in_stock": "+{{count}} unidades disponibles",
+                "out_of_stock": "Agotado",
+                "quantity": "Cantidad",
+                "max_units": "Máxima disponibilidad alcanzada",
+                "add_to_cart": "Añadir al carrito",
+                "buy_now": "Comprar ahora",
+                "shipping_info": "Envío express gratuito",
+                "warranty_info": "2 años de garantía",
+                "overview": "Descripción general",
+                "specs": "Características técnicas",
+                "feature_1": "Componentes de alto rendimiento diseñados para la excelencia",
+                "feature_2": "Gestión térmica avanzada para un rendimiento sostenido",
+                "feature_3": "Diseño y calidad de construcción premium para una durabilidad duradera",
+                "tabs": {
+                    "details": "Detalles",
+                    "reviews": "Reseñas",
+                    "shipping": "Envíos y Devoluciones"
+                },
+                "reviews": {
+                    "empty_title": "Aún no hay reseñas",
+                    "empty_desc": "Sé el primero en compartir tu experiencia con este producto.",
+                    "write": "Escribir una reseña"
+                },
+                "shipping": {
+                    "delivery_title": "Envío Express Global",
+                    "returns_title": "Devoluciones sin complicaciones"
+                },
+                "colors": "Colores",
+                "color": "Color",
+                "size": "Talla",
+                "sizes": "Tallas"
+            },
+            "cart_drawer": {
+                "title": "Carrito de Compras",
+                "empty_title": "Tu carrito está vacío",
+                "empty_desc": "Parece que aún no has añadido nada a tu carrito.",
+                "subtotal": "Subtotal",
+                "shipping": "Envío",
+                "free": "GRATIS",
+                "total": "Total",
+                "checkout": "Proceder al Pago",
+                "continue": "Continuar Comprando"
+            },
+            "toast": {
+                "success_title": "¡Éxito!",
+                "info_title": "Información",
+                "warning_title": "Advertencia",
+                "error_title": "Error",
+                "cart_added": "{{quantity}} x {{product}} añadido al carrito.",
+                "cart_cleared_title": "Carrito vaciado",
+                "cart_cleared": "Tu bolsa de compras está vacía.",
+                "login_success_title": "¡Bienvenido de nuevo!",
+                "login_success": "Sesión iniciada como {{name}}",
+                "login_error_title": "Error al iniciar sesión",
+                "login_error_desc": "Por favor, verifica tus credenciales.",
+                "logout_title": "Sesión cerrada",
+                "logout_success": "Has cerrado sesión correctamente."
+            },
+            "store_info": {
+                "official_store": "Tienda Oficial",
+                "visit_store": "Visitar Tienda",
+                "follow": "Seguir",
+                "store_desc": "Tu destino principal para electrónica de alta gama y equipos de juego. Nos especializamos en llevar los últimos avances tecnológicos directamente a tu puerta con autenticidad garantizada y soporte superior.",
+                "shipping_fast": "Envío Rápido a Nivel Mundial",
+                "secure_payments": "Pagos 100% Seguros",
+                "easy_returns": "Devoluciones Fáciles en 30 Días"
+            },
+            "similar_items": {
+                "title": "Artículos Similares",
+                "view_all": "Ver Todo"
             }
         }
     }
 };
 
+const savedLanguage = localStorage.getItem('pfm_language') || 'en';
+
 i18n
     .use(initReactI18next)
     .init({
         resources,
-        lng: 'en',
+        lng: savedLanguage,
         fallbackLng: 'en',
         interpolation: {
             escapeValue: false
         }
     });
+
+i18n.on('languageChanged', (lng: string) => {
+    localStorage.setItem('pfm_language', lng);
+});
 
 export default i18n;

@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from "
 import type { User } from "../../Domain/Entities/user";
 import type { Token } from "../../Domain/Entities/generics";
 import { authService } from "../../Infrastructure/Services/Auth.service";
+import { toast } from "../Utils/ToastService";
 
 interface AuthContextProps {
     isAuthenticated: boolean;
@@ -22,14 +23,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const initializeAuth = async () => {
             const storedToken = localStorage.getItem("authToken");
             if (storedToken) {
+                const token: Token = JSON.parse(storedToken);
                 try {
-                    const token: Token = JSON.parse(storedToken);
                     const currentUser = await authService.getCurrentUser(token);
                     setUser(currentUser);
                     setIsAuthenticated(true);
-                } catch (error) {
-                    console.error("Failed to initialize auth:", error);
-                    localStorage.removeItem("authToken");
+                } catch (error: any) {
+                    console.error("Auth initialization check failed:", error);
+
+                    // If unauthorized, try to refresh
+                    if (error.statusCode === 401) {
+                        try {
+                            console.log("Token expired, attempting refresh...");
+                            const newToken = await authService.refreshToken(token);
+                            localStorage.setItem("authToken", JSON.stringify(newToken));
+
+                            // Retry getting user with new token
+                            const refreshedUser = await authService.getCurrentUser(newToken);
+                            setUser(refreshedUser);
+                            setIsAuthenticated(true);
+                            console.log("Session refreshed successfully");
+                        } catch (refreshError) {
+                            console.error("Token refresh failed:", refreshError);
+                            localStorage.removeItem("authToken");
+                        }
+                    } else {
+                        // For other errors, we just clear and stay logged out
+                        localStorage.removeItem("authToken");
+                    }
                 }
             }
             setLoading(false);
@@ -45,13 +66,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const currentUser = await authService.getCurrentUser(token);
             setUser(currentUser);
             setIsAuthenticated(true);
-        } catch (error) {
+            toast.success("toast.login_success_title", {
+                descriptionKey: "toast.login_success",
+                params: { name: currentUser.name }
+            });
+        } catch (error: any) {
             console.error("Login failed:", error);
+            toast.error("toast.login_error_title", { descriptionKey: "toast.login_error_desc" });
             throw error;
         }
     };
 
     const logout = async () => {
+        setLoading(true);
         const storedToken = localStorage.getItem("authToken");
         if (storedToken) {
             try {
@@ -64,6 +91,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem("authToken");
         setUser(null);
         setIsAuthenticated(false);
+        setLoading(false);
+        toast.info("toast.logout_title", { descriptionKey: "toast.logout_success" });
     };
 
     return (

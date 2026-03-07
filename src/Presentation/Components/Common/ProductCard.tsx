@@ -2,6 +2,10 @@ import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ShoppingCart } from 'lucide-react';
+import { useCart } from '../../Context/CartContext';
+import { Button } from './Button';
+import type { Product } from '../../../Domain/Entities/product';
 
 interface ProductCardProps {
     id: string;
@@ -11,15 +15,27 @@ interface ProductCardProps {
     isNew?: boolean;
     rating?: number;
     reviews?: number;
+    category?: string;
     index: number;
+    product?: Product;
 }
 
-export const ProductCard = ({ id, image, title, price, isNew, rating, reviews, index }: ProductCardProps) => {
+export const ProductCard = ({ id, image, title, price, isNew, rating, category, product }: ProductCardProps) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const { addToCart } = useCart();
 
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent) => {
+        // Prevent navigation if clicking the cart button
+        if ((e.target as HTMLElement).closest('button')) return;
         navigate(`/product/${id}`);
+    };
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (product) {
+            addToCart(product, 1, null);
+        }
     };
 
     return (
@@ -39,27 +55,41 @@ export const ProductCard = ({ id, image, title, price, isNew, rating, reviews, i
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
-                {/* Overlay with potential actions can be added here */}
                 <div className="absolute inset-0 bg-pfm-primary/0 group-hover:bg-pfm-primary/5 transition-colors duration-300 pointer-events-none" />
             </div >
 
-            <div className="mt-4 flex flex-col gap-1">
-                {rating !== undefined && (
-                    <div className="flex items-center gap-1 mb-1 text-amber-400">
-                        {[...Array(5)].map((_, i) => (
-                            <Star
-                                key={i}
-                                size={12}
-                                className={i < Math.floor(rating) ? "fill-current" : "text-pfm-primary/20"}
+            <div className="mt-4 flex flex-col gap-1 px-1">
+                {category && (
+                    <p className="text-[10px] uppercase tracking-wider font-bold text-pfm-primary/70 mb-0.5">
+                        {category}
+                    </p>
+                )}
+                <h3 className="text-sm font-bold text-pfm-text dark:text-pfm-text-dark group-hover:text-pfm-primary transition-colors line-clamp-1">{title}</h3>
+                <div className="flex items-center justify-between mt-1">
+                    <p className="text-lg font-bold text-pfm-primary">{price}</p>
+
+                    <div className="flex items-center gap-3">
+                        {rating !== undefined && (
+                            <div className="flex items-center gap-1 text-amber-500 font-bold bg-amber-500/5 px-2 py-0.5 rounded-lg">
+                                <Star size={12} className="fill-current" />
+                                <span className="text-xs">{rating.toFixed(1)}</span>
+                            </div>
+                        )}
+                        {product && (
+                            <Button
+                                config={{
+                                    isIconOnly: true,
+                                    size: "sm",
+                                    color: "primary",
+                                    variant: "flat",
+                                    className: "bg-pfm-primary/10 text-pfm-primary hover:bg-pfm-primary hover:text-white transition-all rounded-lg h-8 w-8",
+                                    onClick: handleAddToCart,
+                                    children: <ShoppingCart size={14} />
+                                }}
                             />
-                        ))}
-                        {reviews !== undefined && (
-                            <span className="text-xs font-medium text-pfm-text-muted ml-1">({reviews})</span>
                         )}
                     </div>
-                )}
-                <h3 className="text-sm font-semibold text-pfm-text dark:text-pfm-text-dark group-hover:text-pfm-primary transition-colors line-clamp-1">{title}</h3>
-                <p className="text-lg font-bold text-pfm-primary">{price}</p>
+                </div>
             </div>
         </motion.div >
     );

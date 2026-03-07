@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    ShoppingCart,
     ChevronRight,
     Star,
     Filter,
@@ -11,6 +10,7 @@ import {
     Loader2
 } from 'lucide-react';
 import { Button } from '@Presentation/Components/Common/Button';
+import { ProductCard } from '@Presentation/Components/Common/ProductCard';
 import { Pagination } from '@Presentation/Components/Common/Pagination';
 import {
     Checkbox,
@@ -42,7 +42,7 @@ export const Products = () => {
     const priceMaxParam = Number(searchParams.get('priceMax')) || DEFAULT_MAX_PRICE;
     const ratingFilter = searchParams.get('rating') || '';
     const searchFilter = searchParams.get('search') || '';
-    const categoryFilter = searchParams.get('category') || '';
+    const categoryFilter = searchParams.get('categoryId') || searchParams.get('category') || '';
     const sortFilter = searchParams.get('sort') || 'newest';
     const startDateFilter = searchParams.get('startDate') || '';
     const endDateFilter = searchParams.get('endDate') || '';
@@ -103,7 +103,7 @@ export const Products = () => {
         try {
             const { data, additionalData } = await productService.getProducts({
                 search: searchFilter || null,
-                category: categoryFilter || null,
+                categoryId: categoryFilter || null,
                 sort: sortFilter || null,
                 priceMin: hasPriceFilter ? priceMinParam : null,
                 priceMax: hasPriceFilter ? priceMaxParam : null,
@@ -127,7 +127,7 @@ export const Products = () => {
 
     // Handle skeleton delay to prevent flicker on fast loads
     useEffect(() => {
-        let timer: any;
+        let timer: ReturnType<typeof setTimeout> | undefined;
         if (loading && products.length === 0) {
             timer = setTimeout(() => setShowSkeletons(true), SKELETON_DELAY);
         } else {
@@ -195,7 +195,7 @@ export const Products = () => {
 
     return (
         <div className="min-h-screen bg-pfm-bg text-pfm-text transition-colors duration-300">
-            <main className="mx-auto max-w-[1400px] px-6 py-12 lg:px-12">
+            <div className="mx-auto max-w-[1280px] px-6 py-10 md:px-20">
                 {/* Header Section */}
                 <div className="flex flex-col gap-6 mb-12">
                     <nav className="flex items-center gap-2 text-sm font-medium text-pfm-text-muted">
@@ -206,7 +206,7 @@ export const Products = () => {
 
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-4xl lg:text-5xl font-black tracking-tight text-pfm-text dark:text-pfm-text-dark">
+                            <h1 className="text-3xl font-extrabold tracking-tight text-pfm-text dark:text-pfm-text-dark">
                                 {categoryFilter ? t(getCategoryTranslationKey(categories.find(c => c.id === categoryFilter)?.name || ''), categories.find(c => c.id === categoryFilter)?.name || 'Products') : t('home.categories_data.all_products', 'All Products')}
                             </h1>
                             <p className="text-pfm-primary font-medium text-lg italic">
@@ -448,63 +448,18 @@ export const Products = () => {
                                             </div>
                                         ))
                                     ) : products.length > 0 ? (
-                                        products.map((product) => (
-                                            <motion.div
+                                        products.map((product, index) => (
+                                            <ProductCard
                                                 key={product.id}
-                                                layout
-                                                animate={{
-                                                    opacity: 1,
-                                                    scale: 1
-                                                }}
-                                                exit={{ opacity: 0 }}
-                                                transition={{ duration: 0.1, ease: "linear" }}
-                                                className="group flex flex-col bg-pfm-card dark:bg-pfm-card/5 rounded-[32px] overflow-hidden border border-pfm-border shadow-sm hover:shadow-2xl hover:shadow-pfm-primary/10 transition-shadow duration-500"
-                                            >
-                                                <Link to={`/product/${product.id}`} className="relative w-full aspect-square overflow-hidden bg-pfm-card/50">
-                                                    <img
-                                                        src={product.imgs?.[0]?.url || '/placeholder-product.png'}
-                                                        alt={product.name}
-                                                        loading="lazy"
-                                                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                                                    />
-                                                </Link>
-
-                                                <div className="flex flex-col p-4">
-                                                    <div className="flex items-center gap-1 mb-2">
-                                                        {[...Array(5)].map((_, i) => (
-                                                            <Star
-                                                                key={i}
-                                                                className={`w-3.5 h-3.5 ${(product.rating || 0) > i ? 'fill-amber-400 text-amber-400' : 'text-slate-300'}`}
-                                                                fill={(product.rating || 0) > i ? "currentColor" : "none"}
-                                                            />
-                                                        ))}
-                                                        <span className="text-[10px] font-bold text-pfm-text-muted ml-1">{product.rating || 0}</span>
-                                                    </div>
-                                                    <Link to={`/product/${product.id}`}>
-                                                        <h3 className="text-xl font-bold text-pfm-text dark:text-pfm-text-dark group-hover:text-pfm-primary transition-colors line-clamp-1">
-                                                            {product.name}
-                                                        </h3>
-                                                    </Link>
-                                                    <p className="text-sm font-medium text-pfm-text-muted mt-1 leading-relaxed">
-                                                        {product.subcategory || product.categoryName}
-                                                    </p>
-
-                                                    <div className="flex items-end justify-between mt-auto pt-4">
-                                                        <span className="text-2xl font-black text-pfm-text dark:text-pfm-text-dark tracking-tight">
-                                                            ${product.cost.toFixed(2)}
-                                                        </span>
-                                                        <Button
-                                                            config={{
-                                                                isIconOnly: true,
-                                                                className: "bg-pfm-primary text-white shadow-lg shadow-pfm-primary/20 hover:shadow-pfm-primary/40",
-                                                                radius: "full",
-                                                                variant: "shadow",
-                                                                children: <ShoppingCart className="w-5 h-5" />
-                                                            }}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </motion.div>
+                                                id={product.id}
+                                                index={index}
+                                                title={product.name}
+                                                category={product.subcategory || product.categoryName}
+                                                price={`$${product.cost.toFixed(2)}`}
+                                                image={product.imgs?.[0]?.url || '/placeholder-product.png'}
+                                                rating={product.rating ?? undefined}
+                                                product={product}
+                                            />
                                         ))
                                     ) : !loading && (
                                         <motion.div
@@ -545,8 +500,7 @@ export const Products = () => {
 
                     </div>
                 </div>
-            </main >
-        </div >
+            </div>
+        </div>
     );
 };
-

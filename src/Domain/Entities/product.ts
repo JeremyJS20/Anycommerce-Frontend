@@ -21,6 +21,8 @@ export type Product = {
     details: Details;
     variants: Variants | null;
     reviews: Review[] | null;
+    discount?: number;
+    oldPrice?: number;
 };
 
 export type Variants = {
@@ -53,16 +55,19 @@ export type AttributeType = {
 };
 
 export type productQueryParams = {
-    search: string | null;
-    priceMin: number | null;
-    priceMax: number | null;
-    rating: string | null;
-    category: string | null;
-    subcategory: string | null;
-    sort: string | null;
-    index: number | null;
-    startDate: string | null;
-    endDate: string | null;
+    search?: string | null;
+    priceMin?: number | null;
+    priceMax?: number | null;
+    rating?: string | null;
+    category?: string | null;
+    categoryId?: string | null;
+    subcategory?: string | null;
+    sort?: string | null;
+    index?: number | null;
+    startDate?: string | null;
+    endDate?: string | null;
+    limit?: number;
+    storeId?: string | null;
 };
 
 export type ProductAdditionalData = {
@@ -75,6 +80,9 @@ export type productQueryParamsType =
     | "priceMax"
     | "rating"
     | "category"
+    | "categoryId"
     | "subcategory"
     | "sort"
-    | "index";
+    | "index"
+    | "storeId"
+    | "limit";
