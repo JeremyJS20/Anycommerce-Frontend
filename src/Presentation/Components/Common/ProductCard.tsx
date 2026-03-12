@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
+import { Star, StarHalf } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ShoppingCart } from 'lucide-react';
@@ -34,7 +34,18 @@ export const ProductCard = ({ id, image, title, price, isNew, rating, category, 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.stopPropagation();
         if (product) {
-            addToCart(product, 1, null);
+            const defaultVariants: any[] = [];
+            if (product.variants) {
+                Object.values(product.variants).forEach(options => {
+                    if (Array.isArray(options)) {
+                        const defaultOpt = options.find(opt => opt.default) || options[0];
+                        if (defaultOpt) {
+                            defaultVariants.push(defaultOpt);
+                        }
+                    }
+                });
+            }
+            addToCart(product, 1, defaultVariants.length > 0 ? defaultVariants : null);
         }
     };
 
@@ -70,9 +81,20 @@ export const ProductCard = ({ id, image, title, price, isNew, rating, category, 
 
                     <div className="flex items-center gap-3">
                         {rating !== undefined && (
-                            <div className="flex items-center gap-1 text-amber-500 font-bold bg-amber-500/5 px-2 py-0.5 rounded-lg">
-                                <Star size={12} className="fill-current" />
-                                <span className="text-xs">{rating.toFixed(1)}</span>
+                            <div className="flex items-center gap-1.5 text-amber-500 bg-amber-500/5 px-2 py-0.5 rounded-lg">
+                                <div className="flex items-center gap-0.5">
+                                    {[...Array(5)].map((_, i) => {
+                                        const ratingValue = i + 1;
+                                        if (rating >= ratingValue) {
+                                            return <Star key={i} size={10} className="fill-current" />;
+                                        } else if (rating >= ratingValue - 0.5) {
+                                            return <StarHalf key={i} size={10} className="fill-current" />;
+                                        } else {
+                                            return <Star key={i} size={10} className="opacity-30" />;
+                                        }
+                                    })}
+                                </div>
+                                <span className="text-[10px] font-bold">{rating.toFixed(1)}</span>
                             </div>
                         )}
                         {product && (

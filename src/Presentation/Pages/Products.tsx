@@ -48,6 +48,7 @@ export const Products = () => {
     const endDateFilter = searchParams.get('endDate') || '';
     const hasPriceFilter = searchParams.has('priceMin') || searchParams.has('priceMax');
     const pageParam = Number(searchParams.get('index')) || 1;
+    const storeIdParam = searchParams.get('storeId') || '';
 
     const [products, setProducts] = useState<Product[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
@@ -111,7 +112,8 @@ export const Products = () => {
                 subcategory: null,
                 index: currentPage,
                 startDate: startDateFilter || null,
-                endDate: endDateFilter || null
+                endDate: endDateFilter || null,
+                storeId: storeIdParam || null
             });
             setProducts(data);
             if (additionalData) {
@@ -123,7 +125,7 @@ export const Products = () => {
         } finally {
             setLoading(false);
         }
-    }, [searchFilter, categoryFilter, sortFilter, priceMinParam, priceMaxParam, ratingFilter, startDateFilter, endDateFilter, hasPriceFilter, currentPage]);
+    }, [searchFilter, categoryFilter, sortFilter, priceMinParam, priceMaxParam, ratingFilter, startDateFilter, endDateFilter, hasPriceFilter, currentPage, storeIdParam]);
 
     // Handle skeleton delay to prevent flicker on fast loads
     useEffect(() => {

@@ -6,6 +6,7 @@ import {
     ShoppingCart,
     ChevronRight,
     Star,
+    StarHalf,
     Minus,
     Plus,
     Heart,
@@ -45,21 +46,23 @@ import { useCart } from '@Presentation/Context/CartContext';
 
 // Icon mapping for dynamic feature rendering from string names
 const ICON_MAP: Record<string, LucideIcon> = {
-    Truck,
-    ShieldCheck,
-    Check,
-    Info,
-    MessageSquare,
-    RotateCcw,
-    Lock,
-    Shield,
-    Clock,
-    CreditCard,
-    Zap,
-    Star,
-    Heart,
-    ArrowLeft,
-    Store: StoreIcon
+    truck: Truck,
+    shieldCheck: ShieldCheck,
+    check: Check,
+    info: Info,
+    messageSquare: MessageSquare,
+    rotateCcw: RotateCcw,
+    lock: Lock,
+    shield: Shield,
+    clock: Clock,
+    creditCard: CreditCard,
+    zap: Zap,
+    star: Star,
+    heart: Heart,
+    arrowLeft: ArrowLeft,
+    store: StoreIcon,
+    warranty: ShieldCheck,
+    shipping: Truck
 };
 
 export const ProductDetails = () => {
@@ -322,16 +325,19 @@ export const ProductDetails = () => {
                                 <span className="text-pfm-primary text-xs font-bold tracking-[0.2em] uppercase">{product.subcategory || product.categoryName}</span>
                                 <span className="h-1 w-1 bg-pfm-border rounded-full"></span>
                                 <div className="flex items-center gap-1.5 text-amber-500">
-                                    <div className="flex">
-                                        {[...Array(5)].map((_, i) => (
-                                            <Star
-                                                key={i}
-                                                size={14}
-                                                className={(product.rating || 0) > i ? 'fill-current' : 'text-slate-300 dark:text-slate-600'}
-                                            />
-                                        ))}
+                                    <div className="flex items-center gap-0.5">
+                                        {[...Array(5)].map((_, i) => {
+                                            const ratingValue = i + 1;
+                                            if ((product.rating || 0) >= ratingValue) {
+                                                return <Star key={i} size={14} className="fill-current" />;
+                                            } else if ((product.rating || 0) >= ratingValue - 0.5) {
+                                                return <StarHalf key={i} size={14} className="fill-current" />;
+                                            } else {
+                                                return <Star key={i} size={14} className="opacity-30" />;
+                                            }
+                                        })}
                                     </div>
-                                    <span className="text-pfm-text-muted text-xs font-bold ml-1">({product.rating || 0})</span>
+                                    <span className="text-pfm-text-muted text-xs font-bold ml-1">({(product.rating || 0).toFixed(1)})</span>
                                 </div>
                             </div>
                             <h1 className="text-3xl md:text-4xl font-extrabold text-pfm-text dark:text-pfm-text-dark leading-tight tracking-tight mb-3">
@@ -448,18 +454,36 @@ export const ProductDetails = () => {
 
                         {/* Features */}
                         <div className="grid grid-cols-2 gap-6 pt-10 border-t border-pfm-border mt-4">
-                            <div className="flex items-center gap-3.5 text-sm font-bold text-pfm-text-muted">
-                                <div className="p-2 bg-pfm-primary/10 rounded-xl text-pfm-primary">
-                                    <Truck size={18} />
-                                </div>
-                                {t('product.shipping_info', 'Free express delivery')}
-                            </div>
-                            <div className="flex items-center gap-3.5 text-sm font-bold text-pfm-text-muted">
-                                <div className="p-2 bg-pfm-primary/10 rounded-xl text-pfm-primary">
-                                    <ShieldCheck size={18} />
-                                </div>
-                                {t('product.warranty_info', '2 Year Warranty')}
-                            </div>
+                            {product.features && product.features.length > 0 ? (
+                                product.features.map((feature) => {
+                                    // Map kebab-case from backend to camelCase for ICON_MAP
+                                    const iconKey = feature.icon.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+                                    const IconComponent = ICON_MAP[iconKey] || ICON_MAP[feature.icon] || ICON_MAP[feature.key] || HelpCircle;
+                                    return (
+                                        <div key={feature.key} className="flex items-center gap-3.5 text-sm font-bold text-pfm-text-muted" title={feature.details}>
+                                            <div className="p-2 bg-pfm-primary/10 rounded-xl text-pfm-primary">
+                                                <IconComponent size={18} />
+                                            </div>
+                                            {feature.label}
+                                        </div>
+                                    );
+                                })
+                            ) : (
+                                <>
+                                    <div className="flex items-center gap-3.5 text-sm font-bold text-pfm-text-muted">
+                                        <div className="p-2 bg-pfm-primary/10 rounded-xl text-pfm-primary">
+                                            <Truck size={18} />
+                                        </div>
+                                        {t('product.shipping_info', 'Free express delivery')}
+                                    </div>
+                                    <div className="flex items-center gap-3.5 text-sm font-bold text-pfm-text-muted">
+                                        <div className="p-2 bg-pfm-primary/10 rounded-xl text-pfm-primary">
+                                            <ShieldCheck size={18} />
+                                        </div>
+                                        {t('product.warranty_info', '2 Year Warranty')}
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -627,7 +651,6 @@ export const ProductDetails = () => {
                                             {store.name}
                                         </h3>
                                         <div className="flex items-center gap-1.5 text-amber-500 mt-1.5">
-                                            <Star size={18} fill="currentColor" />
                                             <span className="text-pfm-text dark:text-pfm-text-dark text-lg font-bold">
                                                 {store.metrics.rating.toFixed(1)}/5.0
                                             </span>

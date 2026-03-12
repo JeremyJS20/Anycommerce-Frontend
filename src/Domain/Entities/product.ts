@@ -21,8 +21,17 @@ export type Product = {
     details: Details;
     variants: Variants | null;
     reviews: Review[] | null;
+    features?: ProductFeature[];
     discount?: number;
     oldPrice?: number;
+};
+
+export type ProductFeature = {
+    key: string;
+    label: string;
+    icon: string;
+    details: string;
+    value?: unknown;
 };
 
 export type Variants = {

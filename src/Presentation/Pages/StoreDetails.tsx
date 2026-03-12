@@ -31,19 +31,19 @@ import type { Store } from '@Domain/Entities/store';
 import type { Product } from '@Domain/Entities/product';
 
 const ICON_MAP: Record<string, LucideIcon> = {
-    Truck,
-    ShieldCheck,
-    RotateCcw,
-    Lock,
-    Shield,
-    Clock,
-    CreditCard,
-    Zap,
-    Star,
-    Store: StoreIcon,
+    truck: Truck,
+    shieldCheck: ShieldCheck,
+    rotateCcw: RotateCcw,
+    lock: Lock,
+    shield: Shield,
+    clock: Clock,
+    creditCard: CreditCard,
+    zap: Zap,
+    star: Star,
+    store: StoreIcon,
     bolt: Zap,
-    support_agent: HelpCircle,
-    location_on: MapPin
+    supportAgent: HelpCircle,
+    locationOn: MapPin
 };
 
 export const StoreDetails = () => {
@@ -228,7 +228,8 @@ export const StoreDetails = () => {
                             <h3 className="text-xl font-bold tracking-tight">{t('store.features_title', 'Store Features')}</h3>
                             <div className="mt-6 space-y-6">
                                 {store.features.map((feature, i) => {
-                                    const IconComponent = ICON_MAP[feature.icon] || HelpCircle;
+                                    const iconKey = feature.icon.replace(/-([a-z])/g, (g) => g[1].toUpperCase()).replace(/_([a-z])/g, (g) => g[1].toUpperCase());
+                                    const IconComponent = ICON_MAP[iconKey] || ICON_MAP[feature.icon] || ICON_MAP[feature.key] || HelpCircle;
                                     return (
                                         <div key={i} className="flex items-start gap-4 group">
                                             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-pfm-primary/10 text-pfm-primary group-hover:bg-pfm-primary group-hover:text-white transition-all duration-300">
