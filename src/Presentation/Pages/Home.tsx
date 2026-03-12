@@ -151,11 +151,10 @@ export const Home = () => {
                         {t("categories.title")}
                     </motion.h2>
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:gap-8">
-                        {categories.map((cat, index) => (
+                        {categories.map((cat) => (
                             <CategoryCard
                                 key={cat.id}
                                 id={cat.id}
-                                index={index}
                                 title={t(getCategoryTranslationKey(cat.name), cat.name)}
                                 description={t(getCategoryDescriptionKey(cat.name), cat.description)}
                                 image={cat.image || ''}
@@ -188,11 +187,10 @@ export const Home = () => {
                         </motion.button>
                     </div>
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:gap-8">
-                        {newArrivals.map((product, index) => (
+                        {newArrivals.map((product) => (
                             <ProductCard
                                 key={product.id}
                                 id={product.id}
-                                index={index}
                                 title={product.name}
                                 category={product.categoryName}
                                 price={`${product.currency === 'USD' ? '$' : product.currency} ${product.cost.toFixed(2)}`}
@@ -258,11 +256,10 @@ export const Home = () => {
                         {t("home.best_sellers.title")}
                     </motion.h2>
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:gap-8">
-                        {bestSellers.map((product, index) => (
+                        {bestSellers.map((product) => (
                             <ProductCard
                                 key={product.id}
                                 id={product.id}
-                                index={index}
                                 title={product.name}
                                 category={product.categoryName}
                                 price={`${product.currency === 'USD' ? '$' : product.currency} ${product.cost.toFixed(2)}`}
