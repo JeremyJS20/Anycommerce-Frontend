@@ -16,7 +16,6 @@ interface ProductCardProps {
     rating?: number;
     reviews?: number;
     category?: string;
-    index: number;
     product?: Product;
 }
 
