@@ -19,7 +19,7 @@ export const LanguageToggle = () => {
                     { key: "en", label: "English" },
                     { key: "es", label: "Español" }
                 ],
-                onDropdownAction: (key) => changeLanguage(key)
+                onDropdownAction: (key: string) => changeLanguage(key)
             }}
         />
     );

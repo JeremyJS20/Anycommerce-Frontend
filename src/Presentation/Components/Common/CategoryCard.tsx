@@ -6,10 +6,9 @@ interface CategoryCardProps {
     image: string;
     title: string;
     description: string;
-    index: number;
 }
 
-export const CategoryCard = ({ id, image, title, description, index }: CategoryCardProps) => {
+export const CategoryCard = ({ id, image, title, description }: CategoryCardProps) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
