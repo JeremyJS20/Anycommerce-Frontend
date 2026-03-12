@@ -450,11 +450,10 @@ export const Products = () => {
                                             </div>
                                         ))
                                     ) : products.length > 0 ? (
-                                        products.map((product, index) => (
+                                        products.map((product) => (
                                             <ProductCard
                                                 key={product.id}
                                                 id={product.id}
-                                                index={index}
                                                 title={product.name}
                                                 category={product.subcategory || product.categoryName}
                                                 price={`$${product.cost.toFixed(2)}`}
