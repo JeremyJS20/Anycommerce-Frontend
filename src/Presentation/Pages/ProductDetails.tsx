@@ -729,11 +729,10 @@ export const ProductDetails = () => {
                                 </div>
                             ))
                         ) : (
-                            similarProducts.map((p, idx) => (
+                            similarProducts.map((p) => (
                                 <ProductCard
                                     key={p.id}
                                     id={p.id}
-                                    index={idx}
                                     title={p.name}
                                     price={`${p.currency === 'USD' ? '$' : p.currency} ${p.cost.toFixed(2)}`}
                                     image={p.imgs?.[0]?.url || 'https://via.placeholder.com/400'}

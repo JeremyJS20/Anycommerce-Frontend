@@ -316,11 +316,10 @@ export const StoreDetails = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
                                 >
-                                    {products.map((p, idx) => (
+                                    {products.map((p) => (
                                         <ProductCard
                                             key={p.id}
                                             id={p.id}
-                                            index={idx}
                                             title={p.name}
                                             category={p.categoryName}
                                             price={`${p.currency === 'USD' ? '$' : p.currency} ${p.cost.toFixed(2)}`}
