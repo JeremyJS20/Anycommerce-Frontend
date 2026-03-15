@@ -8,6 +8,7 @@ import { AuthProvider, useAuth } from '@Presentation/Context/AuthContext'
 import { CartProvider } from '@Presentation/Context/CartContext'
 import { Home } from '@Presentation/Pages/Home'
 import { SignIn } from '@Presentation/Pages/Auth/SignIn'
+import { SignUp } from '@Presentation/Pages/Auth/SignUp'
 import { Products } from '@Presentation/Pages/Products'
 import { ProductDetails } from '@Presentation/Pages/ProductDetails'
 import { StoreDetails } from '@Presentation/Pages/StoreDetails'
@@ -64,6 +65,7 @@ const AppContent = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/signin" element={<SignIn />} />
+                    <Route path="/register" element={<SignUp />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/product/:productId" element={<ProductDetails />} />
                     <Route path="/store/:storeId" element={<StoreDetails />} />

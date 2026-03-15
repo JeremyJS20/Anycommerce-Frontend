@@ -95,6 +95,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     localStorage.setItem(AUTH_KEY, JSON.stringify(mergedCart));
                 } catch (error) {
                     console.error('Error fetching/merging backend cart:', error);
+                    toast.handleBackendError(error);
                     const savedAuthCart = localStorage.getItem(AUTH_KEY);
                     if (savedAuthCart) setCartItems(JSON.parse(savedAuthCart));
                 }
@@ -201,7 +202,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const clearCart = useCallback(() => {
         setCartItems([]);
         if (isAuthenticated) {
-            userService.removeCart().catch(err => console.error('Error clearing backend cart:', err));
+            userService.removeCart().catch(err => {
+                console.error('Error clearing backend cart:', err);
+                toast.handleBackendError(err);
+            });
         }
         toast.info("toast.cart_cleared_title", { descriptionKey: "toast.cart_cleared" });
     }, [isAuthenticated]);

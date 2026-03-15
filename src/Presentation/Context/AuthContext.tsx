@@ -9,6 +9,7 @@ interface AuthContextProps {
     user: User | null;
     loading: boolean;
     login: (formData: FormData) => Promise<void>;
+    signUp: (data: any) => Promise<void>;
     logout: () => void;
 }
 
@@ -72,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             });
         } catch (error: any) {
             console.error("Login failed:", error);
-            toast.error("toast.login_error_title", { descriptionKey: "toast.login_error_desc" });
+            toast.handleBackendError(error, "toast.login_error_title");
             throw error;
         }
     };
@@ -95,8 +96,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         toast.info("toast.logout_title", { descriptionKey: "toast.logout_success" });
     };
 
+    const signUp = async (data: any) => {
+        try {
+            await authService.signUp(data);
+            toast.success("auth.sign_up_success");
+        } catch (error: any) {
+            console.error("Sign up failed:", error);
+            toast.handleBackendError(error);
+            throw error;
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, user, loading, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, user, loading, login, signUp, logout }}>
             {children}
         </AuthContext.Provider>
     );

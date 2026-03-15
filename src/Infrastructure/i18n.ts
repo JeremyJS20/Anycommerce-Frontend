@@ -29,7 +29,32 @@ const resources = {
                 "sign_in": "Sign In",
                 "logout": "Logout",
                 "no_account": "Don't have an account?",
-                "sign_up": "Sign up for free"
+                "sign_up": "Sign up for free",
+                "create_account": "Create Account",
+                "join_anycommerce": "Join AnyCommerce to start your shopping journey.",
+                "first_name": "First Name",
+                "first_name_placeholder": "John",
+                "last_name": "Last Name",
+                "last_name_placeholder": "Doe",
+                "confirm_password": "Confirm Password",
+                "password_strength": "Password Strength",
+                "min_chars": "8+ characters",
+                "one_uppercase": "One uppercase",
+                "one_number": "One number",
+                "one_special": "One special char",
+                "already_have_account": "Already have an account?",
+                "sign_up_success": "Registration successful! Please sign in.",
+                "sign_up_failed": "Registration failed. Please try again.",
+                "passwords_dont_match": "Passwords do not match",
+                "errors": {
+                    "first_name_min": "First name must be at least 2 characters",
+                    "last_name_min": "Last name must be at least 2 characters",
+                    "invalid_email": "Please enter a valid email address",
+                    "password_min": "Password must be at least 8 characters",
+                    "password_uppercase": "Password must contain at least one uppercase letter",
+                    "password_number": "Password must contain at least one number",
+                    "password_special": "Password must contain at least one special character"
+                }
             },
             "home": {
                 "hero": {
@@ -289,6 +314,35 @@ const resources = {
             "similar_items": {
                 "title": "Similar Items",
                 "view_all": "View All"
+            },
+            "errors": {
+                "0": "Internal server error",
+                "1000": "Validation error",
+                "1001": "No records found",
+                "1002": "Invalid email or password",
+                "1003": "Unauthorized",
+                "1004": "Email already exists",
+                "1005": "Invalid API key",
+                "1006": "Authorization header missing",
+                "1007": "Invalid authorization scheme",
+                "1008": "Authorization token missing",
+                "1009": "Authorization token expired",
+                "1010": "Invalid authorization token",
+                "1011": "Could not validate authorization token",
+                "1012": "Invalid refresh token",
+                "1013": "User already has a cart",
+                "1014": "User already has a default",
+                "1015": "Could not validate credentials",
+                "1016": "Refresh token expired",
+                "1017": "Could not validate refresh token",
+                "2001": "Card declined",
+                "2002": "Insufficient funds",
+                "2003": "Lost card",
+                "2004": "Stolen card",
+                "2005": "Expired card",
+                "2006": "Incorrect CVC",
+                "2007": "Card velocity exceeded",
+                "2008": "Card declined"
             }
         }
     },
@@ -319,7 +373,32 @@ const resources = {
                 "sign_in": "Iniciar Sesión",
                 "logout": "Cerrar Sesión",
                 "no_account": "¿No tienes una cuenta?",
-                "sign_up": "Regístrate gratis"
+                "sign_up": "Regístrate gratis",
+                "create_account": "Crear Cuenta",
+                "join_anycommerce": "Únete a AnyCommerce para comenzar tu viaje de compras.",
+                "first_name": "Nombre",
+                "first_name_placeholder": "Juan",
+                "last_name": "Apellido",
+                "last_name_placeholder": "Pérez",
+                "confirm_password": "Confirmar Contraseña",
+                "password_strength": "Fortaleza de la Contraseña",
+                "min_chars": "8+ caracteres",
+                "one_uppercase": "Una mayúscula",
+                "one_number": "Un número",
+                "one_special": "Un carácter especial",
+                "already_have_account": "¿Ya tienes una cuenta?",
+                "sign_up_success": "¡Registro exitoso! Por favor, inicia sesión.",
+                "sign_up_failed": "Error en el registro. Por favor, inténtalo de nuevo.",
+                "passwords_dont_match": "Las contraseñas no coinciden",
+                "errors": {
+                    "first_name_min": "El nombre debe tener al menos 2 caracteres",
+                    "last_name_min": "El apellido debe tener al menos 2 caracteres",
+                    "invalid_email": "Por favor, introduce un correo electrónico válido",
+                    "password_min": "La contraseña debe tener al menos 8 caracteres",
+                    "password_uppercase": "La contraseña debe contener al menos una mayúscula",
+                    "password_number": "La contraseña debe contener al menos un número",
+                    "password_special": "La contraseña debe contener al menos un carácter especial"
+                }
             },
             "home": {
                 "hero": {
@@ -579,6 +658,35 @@ const resources = {
             "similar_items": {
                 "title": "Artículos Similares",
                 "view_all": "Ver Todo"
+            },
+            "errors": {
+                "0": "Error interno del servidor",
+                "1000": "Error de validación",
+                "1001": "No se encontraron registros",
+                "1002": "Correo o contraseña inválidos",
+                "1003": "No autorizado",
+                "1004": "El correo ya está registrado",
+                "1005": "Clave API no válida",
+                "1006": "Falta el encabezado de autorización",
+                "1007": "Esquema de autorización no válido",
+                "1008": "Falta el token de autorización",
+                "1009": "Token de autorización expirado",
+                "1010": "Token de autorización no válido",
+                "1011": "No se pudo validar el token de autorización",
+                "1012": "Token de actualización no válido",
+                "1013": "El usuario ya tiene un carrito",
+                "1014": "El usuario ya tiene un valor predeterminado",
+                "1015": "No se pudieron validar las credenciales",
+                "1016": "Token de actualización expirado",
+                "1017": "No se pudo validar el token de actualización",
+                "2001": "Tarjeta declinada",
+                "2002": "Fondos insuficientes",
+                "2003": "Tarjeta perdida",
+                "2004": "Tarjeta robada",
+                "2005": "Tarjeta expirada",
+                "2006": "CVC incorrecto",
+                "2007": "Exceso de intentos con la tarjeta",
+                "2008": "Tarjeta declinada"
             }
         }
     }

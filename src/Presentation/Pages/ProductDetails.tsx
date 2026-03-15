@@ -89,6 +89,7 @@ export const ProductDetails = () => {
         setError(null);
         try {
             const response = await productService.getProductById(productId);
+            console.log('ProductDetails: Fetched product data:', response.data);
             setProduct(response.data);
             setAdditionalData(response.additionalData);
 

@@ -104,7 +104,7 @@ export const Products = () => {
         try {
             const { data, additionalData } = await productService.getProducts({
                 search: searchFilter || null,
-                categoryId: categoryFilter || null,
+                category: categoryFilter || null,
                 sort: sortFilter || null,
                 priceMin: hasPriceFilter ? priceMinParam : null,
                 priceMax: hasPriceFilter ? priceMaxParam : null,

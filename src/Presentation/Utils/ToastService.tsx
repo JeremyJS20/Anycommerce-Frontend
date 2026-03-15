@@ -2,6 +2,7 @@ import { addToast } from "@heroui/react";
 import i18next from "i18next";
 import { CustomToast } from "../Components/Common/CustomToast";
 import type { ToastType } from "../Components/Common/CustomToast";
+import type { errorResponseType } from "../../Domain/Entities/generics";
 
 export interface ToastOptions {
     descriptionKey?: string;
@@ -28,6 +29,28 @@ class ToastService {
 
     public info(titleKey: string, options?: ToastOptions) {
         this.show(titleKey, "info", options);
+    }
+
+    /**
+     * Handles backend errors by extracted the errorId and showing a translated message.
+     * Fallbacks to a generic error message if no translation or errorId is found.
+     */
+    public handleBackendError(error: unknown, fallbackTitleKey: string = "toast.error_title") {
+        const backendError = error as errorResponseType;
+        const errorId = backendError?.error?.errorId;
+
+        if (errorId !== undefined) {
+            const translationKey = `errors.${errorId}`;
+            // Check if translation exists for this errorId
+            if (i18next.exists(translationKey)) {
+                this.error(fallbackTitleKey, { descriptionKey: translationKey });
+                return;
+            }
+        }
+
+        // Fallback to description if available, otherwise use a generic message
+        const description = backendError?.error?.description || "common.error";
+        this.error(fallbackTitleKey, { descriptionKey: description });
     }
 
     private show(titleKey: string, type: ToastType, options?: ToastOptions) {
